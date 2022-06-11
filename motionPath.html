@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motion Path</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #101010;
+    }
+    #circle2,
+    #circle3 {
+      display: none;
+    }
+  </style>
+  <body>
+    <svg width="100mm" height="197mm" viewBox="0 0 210 297">
+      <defs>
+        <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+          <stop offset="0%" style="stop-color: yellow; stop-opacity: 0" />
+          <stop offset="100%" style="stop-color: orange; stop-opacity: 1" />
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="20" r="8" id="circle1" fill="green" />
+      <circle cx="100" cy="20" r="12" id="circle2" fill="url(#grad1)" />
+      <circle cx="100" cy="20" r="6" id="circle3" fill="skyblue" />
+      <g id="layer1">
+        <path
+          style="
+            fill: none;
+            fill-rule: evenodd;
+            stroke: #7b7b7b;
+            stroke-width: 0.5;
+          "
+          id="path20"
+          d="m 101.29762,145.14287 c 3.4491,4.16925 -3.918396,6.70628 -6.929562,5.73263 -8.160072,-2.63852 -8.490785,-13.44129 -4.535696,-19.59176 7.074725,-11.00175 22.734968,-10.88861 32.253958,-3.33876 13.96949,11.0797 13.37116,32.15966 2.14182,44.91615 -14.96693,17.00238 -41.631505,15.89063 -57.578339,0.94489 -20.067463,-18.80768 -18.429364,-51.12599 0.252038,-70.24054 22.625682,-23.150281 60.633241,-20.979279 82.902731,1.44897 26.24383,26.43092 23.53623,70.14847 -2.6459,95.56493 C 116.93036,229.92369 67.489647,226.67724 38.931544,196.73654 6.4820114,162.71602 10.268775,107.54324 43.971317,75.847225 74.76714,46.884875 122.54017,43.536685 158.01159,65.898735"
+        />
+      </g>
+    </svg>
+
+    <button onclick="fullScreenMode(document.documentElement)">
+      Go FullScreen
+    </button>
+    <button onclick="leaveFullScreenMode()">Leave FullScreen</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="./node_modules/gsap/dist/MotionPathPlugin.min.js"></script>
+    <script src="./node_modules/gsap/dist/MotionPathHelper.min.js"></script>
+    <script>
+      function fullScreenMode(elem) {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen()
+        } else if (elem.webkitRequestFullscreen) {
+          /* Safari */
+          elem.webkitRequestFullscreen()
+        } else if (elem.msRequestFullscreen) {
+          /* IE11 */
+          elem.msRequestFullscreen()
+        }
+      }
+
+      function leaveFullScreenMode() {
+        if (document.exitFullscreen) document.exitFullscreen()
+      }
+
+      var tl = gsap.timeline({ repeat: -1, yoyo: true })
+      //   var tl = gsap.timeline({})
+      tl.set("#circle1", {
+        xPercent: -50,
+        yPercent: -50,
+        transformOrigin: "50% 50%",
+      })
+        .addLabel("animate")
+        .to(
+          "#circle1",
+          {
+            duration: 5,
+            motionPath: {
+              path: "#path20",
+              //   align: "self",
+              align: "#path20",
+              autoRotate: true,
+            },
+          },
+          "animate"
+        )
+        .set(
+          "#circle2",
+          {
+            xPercent: -50,
+            yPercent: -50,
+            transformOrigin: "50% 50%",
+            display: "block",
+          },
+          "animate"
+        )
+        .to(
+          "#circle2",
+          {
+            duration: 6,
+            motionPath: {
+              path: "#path20",
+              align: "#path20",
+              autoRotate: true,
+              //   autoRotate: 90
+              end: 0.98,
+            },
+          },
+          "animate"
+        )
+
+      tl.set("#circle3", {
+        xPercent: -50,
+        yPercent: -50,
+        transformOrigin: "50% 50%",
+        display: "block",
+      })
+      tl.to("#circle3", {
+        duration: 5,
+        motionPath: {
+          path: "#path20",
+          align: "#path20",
+          autoRotate: true,
+          //   autoRotate: 90
+          end: 0.95,
+        },
+      })
+
+      //   MotionPathHelper.create("#circle1")
+    </script>
+  </body>
+</html>

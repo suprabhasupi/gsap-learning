@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll Trigger</title>
+    <style>
+      body {
+        margin: 0;
+        font-size: 2rem;
+      }
+      .one {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        height: 80vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .two {
+        /* margin-top: 40rem; */
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        height: 70vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .three {
+        /* margin-top: 40rem; */
+        width: 50px;
+        height: 50px;
+        background-color: green;
+        height: 80vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        /* margin-bottom: 20rem; */
+      }
+      .line {
+        width: 100%;
+        max-width: 800px;
+        height: 8px;
+        margin: 0 0 10px 0;
+        position: relative;
+        display: inline-block;
+        background-color: rgba(255, 255, 255, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="one">
+      <p class="line line1"></p>
+      First Page
+    </div>
+    <div class="two">Second Page</div>
+    <div class="three">Third Page</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="./node_modules/gsap/dist/ScrollTrigger.min.js"></script>
+    <script>
+      //   var tl = gsap.timeline({ repeat: -1, delay: 2, yoyo: true })
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".line-1",
+          scrub: true,
+          start: "top bottom",
+          end: "top top",
+        },
+      })
+
+      //   tl.from(".line", {
+      //     animate: "tl",
+      //     scaleX: 0,
+      //     transformOrigin: "left center",
+      //     ease: "none",
+      //   })
+
+      ScrollTrigger.create({
+        animation: tl,
+        trigger: ".line",
+        start: "top top",
+        end: "+200",
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+      })
+    </script>
+  </body>
+</html>
+
+<!-- https://codepen.io/GreenSock/pen/WNvVOWw -->
+<!-- https://codepen.io/osublake/pen/2152a28cffe2c2c0cca8a3e47f7b21c6?editors=0010 -->
+<!-- https://codepen.io/GreenSock/pen/gOaOeGz?editors=0100 -->
+<!-- https://codepen.io/GreenSock/pen/wvKwZXG?editors=0100 -->
+<!-- https://codepen.io/GreenSock/pen/oNjgEjm -->

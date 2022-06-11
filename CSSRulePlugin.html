@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap"
+      rel="stylesheet"
+    />
+    <title>CSSRulePlugin</title>
+    <style>
+      html {
+        --myColor: green;
+      }
+      .container {
+        width: 400px;
+        margin: auto;
+        box-shadow: inset 1px 1px 5px #ccc;
+        padding: 15px 25px;
+        font-family: "Baloo 2", cursive;
+        color: var(--myColor);
+      }
+      .img-wrapper {
+        width: 400px;
+      }
+      img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="img-wrapper">
+        <img
+          src="https://www.clipartkey.com/mpngs/m/5-53251_tiger-clipart-tiger-cub-baby-tiger-clipart-png.png"
+        />
+      </div>
+      <div class="info">
+        <h2>Tiger 🐯</h2>
+        <p>
+          The tiger is the largest living cat species and a member of the genus
+          Panthera. It is most recognisable for its dark vertical stripes on
+          orange-brown fur with a lighter underside.
+        </p>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="./node_modules/gsap/dist/CSSRulePlugin.min.js"></script>
+    <script>
+      var tl = gsap.timeline({})
+      tl.to("body", {
+        "--myColor": "orange",
+        duration: 1,
+        yoyo: true,
+        repeat: 20,
+      })
+    </script>
+  </body>
+</html>

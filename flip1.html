@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap"
+      rel="stylesheet"
+    />
+    <title>GSAP Flip 1</title>
+    <style>
+      body {
+        font-family: "Baloo 2", cursive;
+        width: 90%;
+        margin: 4rem auto;
+        position: relative;
+        display: flex;
+      }
+
+      section {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .wrapper > p {
+        margin: 0;
+        position: relative;
+        top: -16px;
+        font-size: 1.2rem;
+      }
+
+      .main-container {
+        border-radius: 1rem;
+        background: #ecf2f7;
+        width: 350px;
+        height: 200px;
+        margin: 25px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+        flex-direction: column;
+        font-size: 1.2rem;
+      }
+
+      .container {
+        width: 100px;
+      }
+
+      img {
+        cursor: pointer;
+        filter: drop-shadow(2px 4px 6px #6c6c6c);
+      }
+
+      .target {
+        border-radius: 1rem;
+        background: #323232;
+        padding: 0.4rem 2rem;
+        box-sizing: border-box;
+        width: 45%;
+        height: 15rem;
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 4rem;
+        margin-top: 1rem;
+      }
+
+      .target-list {
+        height: 3rem;
+        width: 3rem;
+        margin: 0.5rem;
+        filter: drop-shadow(2px 4px 6px black);
+      }
+
+      @media only screen and (max-width: 400px) {
+        body {
+          display: block;
+          width: 100%;
+        }
+        section {
+          margin-bottom: 10rem;
+        }
+        .main-container {
+          width: 250px;
+        }
+        .target {
+          position: fixed;
+          bottom: 0px;
+          width: 100%;
+          margin-left: 0;
+          height: 15rem;
+          padding: 10px;
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="wrapper">
+        <div class="main-container">
+          <img src="./images/001-koala.png" class="container" />
+        </div>
+        <p>Koala</p>
+      </div>
+      <div class="wrapper">
+        <div class="main-container">
+          <img src="./images/002-owl.png" class="container" />
+        </div>
+        <p>Owl</p>
+      </div>
+
+      <div class="wrapper">
+        <div class="main-container">
+          <img src="./images/003-fox.png" class="container" />
+        </div>
+        <p>Fox</p>
+      </div>
+
+      <div class="wrapper">
+        <div class="main-container">
+          <img src="./images/004-elephant.png" class="container" />
+        </div>
+        <p>Elephant</p>
+      </div>
+
+      <div class="wrapper">
+        <div class="main-container">
+          <img src="./images/005-bee.png" class="container" />
+        </div>
+        <p>Bee</p>
+      </div>
+
+      <div class="wrapper">
+        <div class="main-container">
+          <img src="./images/006-bird.png" class="container" />
+        </div>
+        <p>Bird</p>
+      </div>
+
+      <div class="wrapper">
+        <div class="main-container">
+          <img src="./images/007-cat.png" class="container" />
+        </div>
+        <p>Cat</p>
+      </div>
+
+      <div class="wrapper">
+        <div class="main-container">
+          <img src="./images/008-penguin.png" class="container" />
+        </div>
+        <p>Penguin</p>
+      </div>
+
+      <div class="wrapper">
+        <div class="main-container">
+          <img src="./images/009-squirrel.png" class="container" />
+        </div>
+        <p>Squirrel</p>
+      </div>
+
+      <div class="wrapper">
+        <div class="main-container">
+          <img src="./images/010-butterfly.png" class="container" />
+        </div>
+        <p>Butterfly</p>
+      </div>
+    </section>
+
+    <div class="target"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="./node_modules/gsap/dist/Flip.min.js"></script>
+    <script>
+      let items = gsap.utils.toArray(".container")
+      let target = document.querySelector(".target")
+
+      items.map((item) => {
+        let itemContainer = item.parentNode
+
+        item.addEventListener("click", () => {
+          let state = Flip.getState(item)
+          console.log(
+            "🚀 ~ file: flip1.html ~ line 169 ~ item.addEventListener ~ state",
+            state
+          )
+          const newContainer =
+            item.parentNode === itemContainer ? target : itemContainer
+
+          item.parentNode === itemContainer
+            ? item.classList.add("target-list")
+            : item.classList.remove("target-list")
+
+          newContainer.appendChild(item)
+
+          Flip.from(state, {
+            duration: 1,
+            ease: "power1.inOut",
+            scale: "1000px",
+            zIndex: 10,
+          })
+        })
+      })
+
+      window.addEventListener("load", () => {
+        items[0].click()
+        setTimeout(() => {
+          items[4].click()
+        }, 1000)
+      })
+
+      //   Flip.fit(".container", ".target", {
+      //     scale: true,
+      //     duration: 1,
+      //     ease: "power1.inOut",
+      //   })
+    </script>
+  </body>
+</html>

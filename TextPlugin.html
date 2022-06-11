@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Plugin</title>
+  </head>
+  <body>
+    <p class="text">text Plugin</p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="./node_modules/gsap/dist/TextPlugin.min.js"></script>
+    <script>
+      var tl = gsap.timeline({})
+      tl.to("p", {
+        duration: 3,
+        text: {
+          value: "hello",
+          ease: "power2",
+          //   If you'd like to use a different delimiter so that instead of replacing character-by-character, it gets replaced word-by-word,
+          //   just pass an object with configuration properties like this:
+
+          //   delimiter: " ",
+          newClass: "class2",
+          oldClass: "text",
+        },
+      })
+    </script>
+  </body>
+</html>

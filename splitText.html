@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap"
+      rel="stylesheet"
+    />
+    <title>Split Text</title>
+    <style>
+      body {
+        font-family: "Baloo 2", cursive;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="text">Weekly sharing new JS, HTML, CSS articles! 🔥</p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="./node_modules/gsap/dist/SplitText.min.js"></script>
+    <script>
+      var tl = gsap.timeline({ repeat: -1, delay: 2, yoyo: true })
+      let split = new SplitText("#text", { type: "words, chars" })
+
+      //   tl.from(split.words, {
+      tl.from(split.words, {
+        opacity: 0,
+        y: 50,
+        delay: 1,
+        ease: "Back.easeOut",
+        // ease: "none",
+        // ease: "back.in(8)",
+        stagger: 0.2,
+      })
+    </script>
+  </body>
+</html>
